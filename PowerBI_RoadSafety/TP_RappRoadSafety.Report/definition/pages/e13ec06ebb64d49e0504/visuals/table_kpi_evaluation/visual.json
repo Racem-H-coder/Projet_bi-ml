@@ -1,0 +1,81 @@
+{
+    "position":  {
+                     "width":  750,
+                     "y":  670,
+                     "z":  9,
+                     "x":  820,
+                     "tabOrder":  9,
+                     "height":  370
+                 },
+    "name":  "table_kpi_evaluation",
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+    "visual":  {
+                   "query":  {
+                                 "queryState":  {
+                                                    "Values":  {
+                                                                   "projections":  [
+                                                                                       {
+                                                                                           "field":  {
+                                                                                                         "Column":  {
+                                                                                                                        "Expression":  {
+                                                                                                                                           "SourceRef":  {
+                                                                                                                                                             "Entity":  "DIM_TEMPS"
+                                                                                                                                                         }
+                                                                                                                                       },
+                                                                                                                        "Property":  "year"
+                                                                                                                    }
+                                                                                                     },
+                                                                                           "nativeQueryRef":  "Année",
+                                                                                           "active":  true,
+                                                                                           "queryRef":  "DIM_TEMPS.year"
+                                                                                       },
+                                                                                       {
+                                                                                           "field":  {
+                                                                                                         "Measure":  {
+                                                                                                                         "Expression":  {
+                                                                                                                                            "SourceRef":  {
+                                                                                                                                                              "Entity":  "FACT_COLLISION"
+                                                                                                                                                          }
+                                                                                                                                        },
+                                                                                                                         "Property":  "Nombre_Collisions"
+                                                                                                                     }
+                                                                                                     },
+                                                                                           "nativeQueryRef":  "Total Accidents",
+                                                                                           "queryRef":  "FACT_COLLISION.Nombre_Collisions"
+                                                                                       },
+                                                                                       {
+                                                                                           "field":  {
+                                                                                                         "Measure":  {
+                                                                                                                         "Expression":  {
+                                                                                                                                            "SourceRef":  {
+                                                                                                                                                              "Entity":  "FACT_COLLISION"
+                                                                                                                                                          }
+                                                                                                                                        },
+                                                                                                                         "Property":  "Cout_Societal_Total"
+                                                                                                                     }
+                                                                                                     },
+                                                                                           "nativeQueryRef":  "Coût Global",
+                                                                                           "queryRef":  "FACT_COLLISION.Cout_Societal_Total"
+                                                                                       },
+                                                                                       {
+                                                                                           "field":  {
+                                                                                                         "Measure":  {
+                                                                                                                         "Expression":  {
+                                                                                                                                            "SourceRef":  {
+                                                                                                                                                              "Entity":  "FACT_COLLISION"
+                                                                                                                                                          }
+                                                                                                                                        },
+                                                                                                                         "Property":  "K_Securite"
+                                                                                                                     }
+                                                                                                     },
+                                                                                           "nativeQueryRef":  "Score K_Securite",
+                                                                                           "queryRef":  "FACT_COLLISION.K_Securite"
+                                                                                       }
+                                                                                   ]
+                                                               }
+                                                }
+                             },
+                   "visualType":  "tableEx",
+                   "drillFilterOtherVisuals":  true
+               }
+}

@@ -1,0 +1,39 @@
+{
+    "position":  {
+                     "width":  360,
+                     "y":  30,
+                     "z":  1,
+                     "x":  430,
+                     "tabOrder":  1,
+                     "height":  130
+                 },
+    "name":  "kpi_total_cout",
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+    "visual":  {
+                   "query":  {
+                                 "queryState":  {
+                                                    "Values":  {
+                                                                   "projections":  [
+                                                                                       {
+                                                                                           "field":  {
+                                                                                                         "Measure":  {
+                                                                                                                         "Expression":  {
+                                                                                                                                            "SourceRef":  {
+                                                                                                                                                              "Entity":  "FACT_COLLISION"
+                                                                                                                                                          }
+                                                                                                                                        },
+                                                                                                                         "Property":  "Cout_Societal_Total"
+                                                                                                                     }
+                                                                                                     },
+                                                                                           "nativeQueryRef":  "Coût Sociétal Global",
+                                                                                           "active":  true,
+                                                                                           "queryRef":  "FACT_COLLISION.Cout_Societal_Total"
+                                                                                       }
+                                                                                   ]
+                                                               }
+                                                }
+                             },
+                   "visualType":  "card",
+                   "drillFilterOtherVisuals":  true
+               }
+}

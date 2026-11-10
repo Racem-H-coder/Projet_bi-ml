@@ -1,0 +1,39 @@
+{
+    "position":  {
+                     "width":  360,
+                     "y":  30,
+                     "z":  3,
+                     "x":  1210,
+                     "tabOrder":  3,
+                     "height":  130
+                 },
+    "name":  "kpi_taux_ksi",
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+    "visual":  {
+                   "query":  {
+                                 "queryState":  {
+                                                    "Values":  {
+                                                                   "projections":  [
+                                                                                       {
+                                                                                           "field":  {
+                                                                                                         "Measure":  {
+                                                                                                                         "Expression":  {
+                                                                                                                                            "SourceRef":  {
+                                                                                                                                                              "Entity":  "FACT_COLLISION"
+                                                                                                                                                          }
+                                                                                                                                        },
+                                                                                                                         "Property":  "Taux_Gravite_KSI_Pct"
+                                                                                                                     }
+                                                                                                     },
+                                                                                           "nativeQueryRef":  "Taux Accidents Graves (KSI)",
+                                                                                           "active":  true,
+                                                                                           "queryRef":  "FACT_COLLISION.Taux_Gravite_KSI_Pct"
+                                                                                       }
+                                                                                   ]
+                                                               }
+                                                }
+                             },
+                   "visualType":  "card",
+                   "drillFilterOtherVisuals":  true
+               }
+}

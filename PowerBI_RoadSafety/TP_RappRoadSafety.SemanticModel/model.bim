@@ -1,0 +1,556 @@
+{
+  "name": "DW_RoadSafety",
+  "compatibilityLevel": 1606,
+  "model": {
+    "culture": "fr-FR",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "tables": [
+      {
+        "name": "DIM_TEMPS",
+        "columns": [
+          {
+            "name": "temps_key",
+            "dataType": "int64",
+            "sourceColumn": "temps_key"
+          },
+          {
+            "name": "date",
+            "dataType": "dateTime",
+            "sourceColumn": "date"
+          },
+          {
+            "name": "day_of_week",
+            "dataType": "int64",
+            "sourceColumn": "day_of_week"
+          },
+          {
+            "name": "day_name",
+            "dataType": "string",
+            "sourceColumn": "day_name"
+          },
+          {
+            "name": "month",
+            "dataType": "int64",
+            "sourceColumn": "month"
+          },
+          {
+            "name": "month_name",
+            "dataType": "string",
+            "sourceColumn": "month_name"
+          },
+          {
+            "name": "quarter",
+            "dataType": "int64",
+            "sourceColumn": "quarter"
+          },
+          {
+            "name": "year",
+            "dataType": "int64",
+            "sourceColumn": "year"
+          },
+          {
+            "name": "time_band",
+            "dataType": "string",
+            "sourceColumn": "time_band"
+          },
+          {
+            "name": "is_weekend",
+            "dataType": "boolean",
+            "sourceColumn": "is_weekend"
+          },
+          {
+            "name": "is_night",
+            "dataType": "boolean",
+            "sourceColumn": "is_night"
+          },
+          {
+            "type": "calculated",
+            "name": "Annee (groupes)",
+            "dataType": "string",
+            "expression": "SWITCH(TRUE(), DIM_TEMPS[year] >= 2018 && DIM_TEMPS[year] <= 2020, \"2018-2020\", DIM_TEMPS[year] >= 2021 && DIM_TEMPS[year] <= 2022, \"2021-2022\", \"Autre\")"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DIM_TEMPS-Partition",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = Sql.Database(\"localhost\", \"DW_RoadSafety\", [Query=\"SELECT temps_key, date, day_of_week, day_name, month, month_name, quarter, year, time_band, is_weekend, is_night FROM dbo.DIM_TEMPS\"])\nin\n    Source"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hiérarchie Calendrier",
+            "levels": [
+              {
+                "name": "Année",
+                "ordinal": 0,
+                "column": "year"
+              },
+              {
+                "name": "Trimestre",
+                "ordinal": 1,
+                "column": "quarter"
+              },
+              {
+                "name": "Mois",
+                "ordinal": 2,
+                "column": "month_name"
+              },
+              {
+                "name": "Date",
+                "ordinal": 3,
+                "column": "date"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DIM_LIEU",
+        "columns": [
+          {
+            "name": "location_key",
+            "dataType": "int64",
+            "sourceColumn": "location_key"
+          },
+          {
+            "name": "longitude",
+            "dataType": "double",
+            "sourceColumn": "longitude"
+          },
+          {
+            "name": "latitude",
+            "dataType": "double",
+            "sourceColumn": "latitude"
+          },
+          {
+            "name": "local_authority_district",
+            "dataType": "string",
+            "sourceColumn": "local_authority_district"
+          },
+          {
+            "name": "police_force",
+            "dataType": "string",
+            "sourceColumn": "police_force"
+          },
+          {
+            "name": "rural_urban_area",
+            "dataType": "string",
+            "sourceColumn": "rural_urban_area"
+          },
+          {
+            "name": "region",
+            "dataType": "string",
+            "sourceColumn": "region"
+          },
+          {
+            "name": "country",
+            "dataType": "string",
+            "sourceColumn": "country"
+          },
+          {
+            "type": "calculated",
+            "name": "Milieu_Harmonise",
+            "dataType": "string",
+            "expression": "SWITCH(DIM_LIEU[rural_urban_area], \"1\", \"Urbain\", \"2\", \"Rural\", \"Missing\", \"Non Spécifié\", DIM_LIEU[rural_urban_area])"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DIM_LIEU-Partition",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = Sql.Database(\"localhost\", \"DW_RoadSafety\", [Query=\"SELECT location_key, longitude, latitude, local_authority_district, police_force, rural_urban_area, region, country FROM dbo.DIM_LIEU\"])\nin\n    Source"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hiérarchie Géographique",
+            "levels": [
+              {
+                "name": "Pays",
+                "ordinal": 0,
+                "column": "country"
+              },
+              {
+                "name": "Région",
+                "ordinal": 1,
+                "column": "region"
+              },
+              {
+                "name": "Police Force",
+                "ordinal": 2,
+                "column": "police_force"
+              },
+              {
+                "name": "District",
+                "ordinal": 3,
+                "column": "local_authority_district"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DIM_CONDITIONS",
+        "columns": [
+          {
+            "name": "condition_key",
+            "dataType": "int64",
+            "sourceColumn": "condition_key"
+          },
+          {
+            "name": "light_conditions",
+            "dataType": "string",
+            "sourceColumn": "light_conditions"
+          },
+          {
+            "name": "weather_conditions",
+            "dataType": "string",
+            "sourceColumn": "weather_conditions"
+          },
+          {
+            "name": "road_surface_conditions",
+            "dataType": "string",
+            "sourceColumn": "road_surface_conditions"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DIM_CONDITIONS-Partition",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = Sql.Database(\"localhost\", \"DW_RoadSafety\", [Query=\"SELECT condition_key, light_conditions, weather_conditions, road_surface_conditions FROM dbo.DIM_CONDITIONS\"])\nin\n    Source"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DIM_VEHICULE",
+        "columns": [
+          {
+            "name": "vehicle_type_key",
+            "dataType": "int64",
+            "sourceColumn": "vehicle_type_key"
+          },
+          {
+            "name": "vehicle_type_label",
+            "dataType": "string",
+            "sourceColumn": "vehicle_type_label"
+          },
+          {
+            "name": "propulsion_code",
+            "dataType": "string",
+            "sourceColumn": "propulsion_code"
+          },
+          {
+            "name": "vehicle_category",
+            "dataType": "string",
+            "sourceColumn": "vehicle_category"
+          },
+          {
+            "name": "vehicle_model",
+            "dataType": "string",
+            "sourceColumn": "vehicle_model"
+          },
+          {
+            "name": "vehicle_colour",
+            "dataType": "string",
+            "sourceColumn": "vehicle_colour"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DIM_VEHICULE-Partition",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = Sql.Database(\"localhost\", \"DW_RoadSafety\", [Query=\"SELECT vehicle_type_key, vehicle_type_label, propulsion_code, vehicle_category, vehicle_model, vehicle_colour FROM dbo.DIM_VEHICULE\"])\nin\n    Source"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hiérarchie Véhicule",
+            "levels": [
+              {
+                "name": "Catégorie",
+                "ordinal": 0,
+                "column": "vehicle_category"
+              },
+              {
+                "name": "Type",
+                "ordinal": 1,
+                "column": "vehicle_type_label"
+              },
+              {
+                "name": "Modèle",
+                "ordinal": 2,
+                "column": "vehicle_model"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DIM_VICTIME",
+        "columns": [
+          {
+            "name": "casualty_key",
+            "dataType": "int64",
+            "sourceColumn": "casualty_key"
+          },
+          {
+            "name": "casualty_class",
+            "dataType": "string",
+            "sourceColumn": "casualty_class"
+          },
+          {
+            "name": "casualty_type",
+            "dataType": "string",
+            "sourceColumn": "casualty_type"
+          },
+          {
+            "name": "age_band_casualty",
+            "dataType": "string",
+            "sourceColumn": "age_band_casualty"
+          },
+          {
+            "name": "sex_of_casualty",
+            "dataType": "string",
+            "sourceColumn": "sex_of_casualty"
+          },
+          {
+            "name": "usager_vulnerable",
+            "dataType": "boolean",
+            "sourceColumn": "usager_vulnerable"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DIM_VICTIME-Partition",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = Sql.Database(\"localhost\", \"DW_RoadSafety\", [Query=\"SELECT casualty_key, casualty_class, casualty_type, age_band_casualty, sex_of_casualty, usager_vulnerable FROM dbo.DIM_VICTIME\"])\nin\n    Source"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DIM_ROAD",
+        "columns": [
+          {
+            "name": "road_key",
+            "dataType": "int64",
+            "sourceColumn": "road_key"
+          },
+          {
+            "name": "first_road_class",
+            "dataType": "string",
+            "sourceColumn": "first_road_class"
+          },
+          {
+            "name": "road_type",
+            "dataType": "string",
+            "sourceColumn": "road_type"
+          },
+          {
+            "name": "speed_limit",
+            "dataType": "int64",
+            "sourceColumn": "speed_limit"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DIM_ROAD-Partition",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = Sql.Database(\"localhost\", \"DW_RoadSafety\", [Query=\"SELECT road_key, first_road_class, road_type, speed_limit FROM dbo.DIM_ROAD\"])\nin\n    Source"
+            }
+          }
+        ]
+      },
+      {
+        "name": "FACT_COLLISION",
+        "columns": [
+          {
+            "name": "collision_id",
+            "dataType": "int64",
+            "sourceColumn": "collision_id"
+          },
+          {
+            "name": "temps_key",
+            "dataType": "int64",
+            "sourceColumn": "temps_key"
+          },
+          {
+            "name": "location_key",
+            "dataType": "int64",
+            "sourceColumn": "location_key"
+          },
+          {
+            "name": "road_key",
+            "dataType": "int64",
+            "sourceColumn": "road_key"
+          },
+          {
+            "name": "condition_key",
+            "dataType": "int64",
+            "sourceColumn": "condition_key"
+          },
+          {
+            "name": "vehicle_type_key",
+            "dataType": "int64",
+            "sourceColumn": "vehicle_type_key"
+          },
+          {
+            "name": "casualty_key",
+            "dataType": "int64",
+            "sourceColumn": "casualty_key"
+          },
+          {
+            "name": "number_of_vehicles",
+            "dataType": "int64",
+            "sourceColumn": "number_of_vehicles"
+          },
+          {
+            "name": "number_of_casualties",
+            "dataType": "int64",
+            "sourceColumn": "number_of_casualties"
+          },
+          {
+            "name": "collision_severity",
+            "dataType": "int64",
+            "sourceColumn": "collision_severity"
+          },
+          {
+            "name": "gravity_adjusted_crash",
+            "dataType": "int64",
+            "sourceColumn": "gravity_adjusted_crash"
+          },
+          {
+            "name": "score_point_noir",
+            "dataType": "double",
+            "sourceColumn": "score_point_noir"
+          },
+          {
+            "name": "cost_societal_gbp",
+            "dataType": "double",
+            "sourceColumn": "cost_societal_gbp",
+            "formatString": "#,##0.00 £"
+          },
+          {
+            "name": "est_ksi",
+            "dataType": "boolean",
+            "sourceColumn": "est_ksi"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "FACT_COLLISION-Partition",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = Sql.Database(\"localhost\", \"DW_RoadSafety\", [Query=\"SELECT collision_id, temps_key, location_key, road_key, condition_key, vehicle_type_key, casualty_key, number_of_vehicles, number_of_casualties, collision_severity, gravity_adjusted_crash, score_point_noir, cost_societal_gbp, est_ksi FROM dbo.FACT_COLLISION\"])\nin\n    Source"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Nombre_Collisions",
+            "expression": "COUNTROWS('FACT_COLLISION')",
+            "formatString": "#,##0",
+            "displayFolder": "1. Volume Accidents"
+          },
+          {
+            "name": "Total_Victimes",
+            "expression": "SUM('FACT_COLLISION'[number_of_casualties])",
+            "formatString": "#,##0",
+            "displayFolder": "1. Volume Accidents"
+          },
+          {
+            "name": "Total_Accidents_Graves_KSI",
+            "expression": "CALCULATE(COUNTROWS('FACT_COLLISION'), 'FACT_COLLISION'[est_ksi] = TRUE())",
+            "formatString": "#,##0",
+            "displayFolder": "1. Volume Accidents"
+          },
+          {
+            "name": "Taux_Gravite_KSI_Pct",
+            "expression": "DIVIDE([Total_Accidents_Graves_KSI], [Nombre_Collisions], 0)",
+            "formatString": "0.0 %",
+            "displayFolder": "1. Volume Accidents"
+          },
+          {
+            "name": "Cout_Societal_Total",
+            "expression": "SUM('FACT_COLLISION'[cost_societal_gbp])",
+            "formatString": "#,##0 £",
+            "displayFolder": "2. Impact Economique"
+          },
+          {
+            "name": "Cout_Moyen_Par_Accident",
+            "expression": "DIVIDE([Cout_Societal_Total], [Nombre_Collisions], 0)",
+            "formatString": "#,##0.00 £",
+            "displayFolder": "2. Impact Economique"
+          },
+          {
+            "name": "Score_Point_Noir_Total",
+            "expression": "SUM('FACT_COLLISION'[score_point_noir])",
+            "formatString": "#,##0.00",
+            "displayFolder": "2. Impact Economique"
+          },
+          {
+            "name": "K_Securite",
+            "expression": "VAR X = 50000000 VAR CurrentCout = [Cout_Societal_Total] RETURN SWITCH(TRUE(), CurrentCout < 0.6 * X, 1, CurrentCout <= 0.9 * X, 0, CurrentCout > 0.9 * X, -1, BLANK())",
+            "formatString": "0",
+            "displayFolder": "3. Indicateurs & Objectifs"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "Relationship",
+        "toTable": "DIM_TEMPS",
+        "toColumn": "temps_key",
+        "fromTable": "FACT_COLLISION",
+        "fromColumn": "temps_key"
+      },
+      {
+        "name": "Relationship 1",
+        "toTable": "DIM_LIEU",
+        "toColumn": "location_key",
+        "fromTable": "FACT_COLLISION",
+        "fromColumn": "location_key"
+      },
+      {
+        "name": "Relationship 2",
+        "toTable": "DIM_CONDITIONS",
+        "toColumn": "condition_key",
+        "fromTable": "FACT_COLLISION",
+        "fromColumn": "condition_key"
+      },
+      {
+        "name": "Relationship 3",
+        "toTable": "DIM_VEHICULE",
+        "toColumn": "vehicle_type_key",
+        "fromTable": "FACT_COLLISION",
+        "fromColumn": "vehicle_type_key"
+      },
+      {
+        "name": "Relationship 4",
+        "toTable": "DIM_VICTIME",
+        "toColumn": "casualty_key",
+        "fromTable": "FACT_COLLISION",
+        "fromColumn": "casualty_key"
+      },
+      {
+        "name": "Relationship 5",
+        "toTable": "DIM_ROAD",
+        "toColumn": "road_key",
+        "fromTable": "FACT_COLLISION",
+        "fromColumn": "road_key"
+      }
+    ]
+  }
+}

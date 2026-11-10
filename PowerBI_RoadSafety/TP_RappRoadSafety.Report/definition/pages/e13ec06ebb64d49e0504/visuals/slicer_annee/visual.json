@@ -1,0 +1,39 @@
+{
+    "position":  {
+                     "width":  280,
+                     "y":  30,
+                     "z":  4,
+                     "x":  1600,
+                     "tabOrder":  4,
+                     "height":  320
+                 },
+    "name":  "slicer_annee",
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+    "visual":  {
+                   "query":  {
+                                 "queryState":  {
+                                                    "Values":  {
+                                                                   "projections":  [
+                                                                                       {
+                                                                                           "field":  {
+                                                                                                         "Column":  {
+                                                                                                                        "Expression":  {
+                                                                                                                                           "SourceRef":  {
+                                                                                                                                                             "Entity":  "DIM_TEMPS"
+                                                                                                                                                         }
+                                                                                                                                       },
+                                                                                                                        "Property":  "year"
+                                                                                                                    }
+                                                                                                     },
+                                                                                           "nativeQueryRef":  "Année",
+                                                                                           "active":  true,
+                                                                                           "queryRef":  "DIM_TEMPS.year"
+                                                                                       }
+                                                                                   ]
+                                                               }
+                                                }
+                             },
+                   "visualType":  "slicer",
+                   "drillFilterOtherVisuals":  true
+               }
+}

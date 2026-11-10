@@ -1,0 +1,57 @@
+{
+    "position":  {
+                     "width":  750,
+                     "y":  190,
+                     "z":  7,
+                     "x":  820,
+                     "tabOrder":  7,
+                     "height":  450
+                 },
+    "name":  "pie_conditions_meteo",
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+    "visual":  {
+                   "query":  {
+                                 "queryState":  {
+                                                    "Category":  {
+                                                                     "projections":  [
+                                                                                         {
+                                                                                             "field":  {
+                                                                                                           "Column":  {
+                                                                                                                          "Expression":  {
+                                                                                                                                             "SourceRef":  {
+                                                                                                                                                               "Entity":  "DIM_CONDITIONS"
+                                                                                                                                                           }
+                                                                                                                                         },
+                                                                                                                          "Property":  "weather_conditions"
+                                                                                                                      }
+                                                                                                       },
+                                                                                             "nativeQueryRef":  "Météo",
+                                                                                             "active":  true,
+                                                                                             "queryRef":  "DIM_CONDITIONS.weather_conditions"
+                                                                                         }
+                                                                                     ]
+                                                                 },
+                                                    "Y":  {
+                                                              "projections":  [
+                                                                                  {
+                                                                                      "field":  {
+                                                                                                    "Measure":  {
+                                                                                                                    "Expression":  {
+                                                                                                                                       "SourceRef":  {
+                                                                                                                                                         "Entity":  "FACT_COLLISION"
+                                                                                                                                                     }
+                                                                                                                                   },
+                                                                                                                    "Property":  "Nombre_Collisions"
+                                                                                                                }
+                                                                                                },
+                                                                                      "nativeQueryRef":  "Accidents",
+                                                                                      "queryRef":  "FACT_COLLISION.Nombre_Collisions"
+                                                                                  }
+                                                                              ]
+                                                          }
+                                                }
+                             },
+                   "visualType":  "pieChart",
+                   "drillFilterOtherVisuals":  true
+               }
+}

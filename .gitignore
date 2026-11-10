@@ -1,0 +1,74 @@
+﻿# ==============================================================================
+# .gitignore - Projet Data Warehouse & Business Intelligence (Road Safety UK)
+# ESPRIT 2026
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Visual Studio & SSDT (SQL Server Integration Services - SSIS)
+# ------------------------------------------------------------------------------
+.vs/
+bin/
+obj/
+*.dtproj.user
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.ispac
+BuildLog.xml
+UpgradeLog*.XML
+UpgradeLog*.htm
+
+# ------------------------------------------------------------------------------
+# 2. Power BI Desktop & Temporary Workspace Caches
+# ------------------------------------------------------------------------------
+*.tmp
+*.pbix.tmp
+*.pbit.tmp
+pbiworkspace.lock
+FlightRecorderCurrent.trc
+AnalysisServicesWorkspaces/
+AutoRecovery/
+TempSaves/
+
+# ------------------------------------------------------------------------------
+# 3. SQL Server / Base de DonnÃ©es
+# ------------------------------------------------------------------------------
+*.mdf
+*.ldf
+*.ndf
+*.bak
+*.trn
+
+# ------------------------------------------------------------------------------
+# 4. Python
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# ------------------------------------------------------------------------------
+# 5. Fichiers SystÃ¨me & Environnement (Windows / macOS)
+# ------------------------------------------------------------------------------
+~$*
+*.tmp
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# ------------------------------------------------------------------------------
+# 6. DonnÃ©es Volumineuses (Optionnel / Git LFS)
+# DÃ©commenter les lignes ci-dessous si vous ne souhaitez pas versionner les CSV bruts (>50 Mo)
+# ------------------------------------------------------------------------------
+Data 5years/*.csv
+

@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../TP_RappRoadSafety.SemanticModel"
+    },
+    "byConnection": null
+  }
+}

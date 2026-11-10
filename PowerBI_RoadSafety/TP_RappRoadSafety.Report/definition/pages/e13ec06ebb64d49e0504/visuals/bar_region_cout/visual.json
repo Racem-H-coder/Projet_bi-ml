@@ -1,0 +1,57 @@
+{
+    "position":  {
+                     "width":  750,
+                     "y":  190,
+                     "z":  6,
+                     "x":  40,
+                     "tabOrder":  6,
+                     "height":  450
+                 },
+    "name":  "bar_region_cout",
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+    "visual":  {
+                   "query":  {
+                                 "queryState":  {
+                                                    "Category":  {
+                                                                     "projections":  [
+                                                                                         {
+                                                                                             "field":  {
+                                                                                                           "Column":  {
+                                                                                                                          "Expression":  {
+                                                                                                                                             "SourceRef":  {
+                                                                                                                                                               "Entity":  "DIM_LIEU"
+                                                                                                                                                           }
+                                                                                                                                         },
+                                                                                                                          "Property":  "region"
+                                                                                                                      }
+                                                                                                       },
+                                                                                             "nativeQueryRef":  "Région",
+                                                                                             "active":  true,
+                                                                                             "queryRef":  "DIM_LIEU.region"
+                                                                                         }
+                                                                                     ]
+                                                                 },
+                                                    "Y":  {
+                                                              "projections":  [
+                                                                                  {
+                                                                                      "field":  {
+                                                                                                    "Measure":  {
+                                                                                                                    "Expression":  {
+                                                                                                                                       "SourceRef":  {
+                                                                                                                                                         "Entity":  "FACT_COLLISION"
+                                                                                                                                                     }
+                                                                                                                                   },
+                                                                                                                    "Property":  "Cout_Societal_Total"
+                                                                                                                }
+                                                                                                },
+                                                                                      "nativeQueryRef":  "Coût Sociétal",
+                                                                                      "queryRef":  "FACT_COLLISION.Cout_Societal_Total"
+                                                                                  }
+                                                                              ]
+                                                          }
+                                                }
+                             },
+                   "visualType":  "clusteredBarChart",
+                   "drillFilterOtherVisuals":  true
+               }
+}

@@ -1,0 +1,39 @@
+{
+    "position":  {
+                     "width":  360,
+                     "y":  30,
+                     "z":  0,
+                     "x":  40,
+                     "tabOrder":  0,
+                     "height":  130
+                 },
+    "name":  "kpi_total_accidents",
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+    "visual":  {
+                   "query":  {
+                                 "queryState":  {
+                                                    "Values":  {
+                                                                   "projections":  [
+                                                                                       {
+                                                                                           "field":  {
+                                                                                                         "Measure":  {
+                                                                                                                         "Expression":  {
+                                                                                                                                            "SourceRef":  {
+                                                                                                                                                              "Entity":  "FACT_COLLISION"
+                                                                                                                                                          }
+                                                                                                                                        },
+                                                                                                                         "Property":  "Nombre_Collisions"
+                                                                                                                     }
+                                                                                                     },
+                                                                                           "nativeQueryRef":  "Nombre Total d\u0027Accidents",
+                                                                                           "active":  true,
+                                                                                           "queryRef":  "FACT_COLLISION.Nombre_Collisions"
+                                                                                       }
+                                                                                   ]
+                                                               }
+                                                }
+                             },
+                   "visualType":  "card",
+                   "drillFilterOtherVisuals":  true
+               }
+}

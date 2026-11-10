@@ -1,0 +1,57 @@
+{
+    "position":  {
+                     "width":  750,
+                     "y":  670,
+                     "z":  8,
+                     "x":  40,
+                     "tabOrder":  8,
+                     "height":  370
+                 },
+    "name":  "col_evolution_annee",
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+    "visual":  {
+                   "query":  {
+                                 "queryState":  {
+                                                    "Category":  {
+                                                                     "projections":  [
+                                                                                         {
+                                                                                             "field":  {
+                                                                                                           "Column":  {
+                                                                                                                          "Expression":  {
+                                                                                                                                             "SourceRef":  {
+                                                                                                                                                               "Entity":  "DIM_TEMPS"
+                                                                                                                                                           }
+                                                                                                                                         },
+                                                                                                                          "Property":  "year"
+                                                                                                                      }
+                                                                                                       },
+                                                                                             "nativeQueryRef":  "Année",
+                                                                                             "active":  true,
+                                                                                             "queryRef":  "DIM_TEMPS.year"
+                                                                                         }
+                                                                                     ]
+                                                                 },
+                                                    "Y":  {
+                                                              "projections":  [
+                                                                                  {
+                                                                                      "field":  {
+                                                                                                    "Measure":  {
+                                                                                                                    "Expression":  {
+                                                                                                                                       "SourceRef":  {
+                                                                                                                                                         "Entity":  "FACT_COLLISION"
+                                                                                                                                                     }
+                                                                                                                                   },
+                                                                                                                    "Property":  "Cout_Societal_Total"
+                                                                                                                }
+                                                                                                },
+                                                                                      "nativeQueryRef":  "Coût Sociétal Total",
+                                                                                      "queryRef":  "FACT_COLLISION.Cout_Societal_Total"
+                                                                                  }
+                                                                              ]
+                                                          }
+                                                }
+                             },
+                   "visualType":  "columnChart",
+                   "drillFilterOtherVisuals":  true
+               }
+}

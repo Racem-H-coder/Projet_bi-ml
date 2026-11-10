@@ -1,0 +1,39 @@
+{
+    "position":  {
+                     "width":  360,
+                     "y":  30,
+                     "z":  2,
+                     "x":  820,
+                     "tabOrder":  2,
+                     "height":  130
+                 },
+    "name":  "kpi_total_victimes",
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+    "visual":  {
+                   "query":  {
+                                 "queryState":  {
+                                                    "Values":  {
+                                                                   "projections":  [
+                                                                                       {
+                                                                                           "field":  {
+                                                                                                         "Measure":  {
+                                                                                                                         "Expression":  {
+                                                                                                                                            "SourceRef":  {
+                                                                                                                                                              "Entity":  "FACT_COLLISION"
+                                                                                                                                                          }
+                                                                                                                                        },
+                                                                                                                         "Property":  "Total_Victimes"
+                                                                                                                     }
+                                                                                                     },
+                                                                                           "nativeQueryRef":  "Total Victimes \u0026 Blessés",
+                                                                                           "active":  true,
+                                                                                           "queryRef":  "FACT_COLLISION.Total_Victimes"
+                                                                                       }
+                                                                                   ]
+                                                               }
+                                                }
+                             },
+                   "visualType":  "card",
+                   "drillFilterOtherVisuals":  true
+               }
+}
