@@ -1,0 +1,18 @@
+{
+  "version": "0.1",
+  "connections": [
+    {
+      "details": {
+        "protocol": "tds",
+        "address": {
+          "server": "localhost",
+          "database": "DW_RoadSafety"
+        },
+        "authentication": null,
+        "query": null
+      },
+      "options": {},
+      "mode": "Import"
+    }
+  ]
+}
