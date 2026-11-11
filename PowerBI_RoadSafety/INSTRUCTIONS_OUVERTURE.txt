@@ -1,0 +1,34 @@
+﻿================================================================================
+GUIDE RAPIDE : COMMENT CHARGER VOTRE DATA WAREHOUSE DANS POWER BI
+================================================================================
+
+ÉTAPE 1 :
+--------
+Faites un double-clic sur :
+-> 01_OUVRIR_EN_PREMIER_RoadSafety.pbids
+
+1. Cliquez sur "OK" sur la fenêtre de chiffrement (normal pour SQL Server en local).
+2. Cliquez sur "Se connecter" avec vos identifiants Windows.
+3. Cochez les tables :
+   - FACT_COLLISION
+   - DIM_TEMPS
+   - DIM_LIEU
+   - DIM_CONDITIONS
+   - DIM_VEHICULE
+   - DIM_VICTIME
+   - DIM_ROAD
+4. Cliquez sur "Charger" (Load).
+
+ÉTAPE 2 :
+--------
+Une fois les données chargées dans Power BI, faites un clic droit -> 'Exécuter avec PowerShell' sur :
+-> 02_AJOUTER_MESURES_DAX.ps1
+
+Toutes vos mesures DAX (Nombre_Collisions, Cout_Societal_Total, K_Securite, etc.)
+seront automatiquement ajoutées dans votre modèle !
+
+ÉTAPE 3 :
+--------
+Dans Power BI Desktop :
+Faites "Fichier > Enregistrer sous" et nommez-le : TP_RappRoadSafety.pbix.
+================================================================================
