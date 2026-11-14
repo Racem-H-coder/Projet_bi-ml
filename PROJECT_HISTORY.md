@@ -113,4 +113,11 @@
        - Tableau de sévérité clinique et taux de gravité KSI (`casualty_severity`).
 - **Validation Technique :** Modèle VertiPaq 30 Mo validé, initialisation SSAS/msmdsrv confirmée sans aucune erreur de corruption de package.
 
+### 3. Actualisation de la Documentation & Schéma d'Architecture (`README.md`)
+- Intégration d'un diagramme Mermaid détaillé de l'architecture décisionnelle de bout en bout (Sourcing CSV ➔ Staging Area ➔ Moteur ETL SSIS/T-SQL ➔ Data Warehouse en étoile ➔ Restitution Power BI).
+- Documentation complète du schéma en étoile (Table de faits `FACT_COLLISION` de 513 801 lignes et 10 tables de dimensions).
+- Détail du tableau de bord exécutif à 4 pages (`Home`, `Vehicle`, `Collision`, `Casualty`) avec lecture en Z-pattern.
+- Alignement strict de l'arborescence du dépôt Git (avec le fichier unique `PowerBI_RoadSafety/TP_RappRoadSafety.pbix`).
+- Commit et push exécutés sur `origin/main` (`8a9322a`).
+
 
