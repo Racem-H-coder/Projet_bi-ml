@@ -1,0 +1,40 @@
+table DIM_VICTIME
+	lineageTag: 6465d5ea-3ad0-4bd7-a91a-debbda3afd1c
+
+	column casualty_key
+		dataType: int64
+		lineageTag: de0d3791-643a-48dc-8aa6-730f2f265617
+		sourceColumn: casualty_key
+
+	column casualty_class
+		dataType: string
+		lineageTag: 2e3812c3-9f54-42cf-8bec-c0690c31b40c
+		sourceColumn: casualty_class
+
+	column casualty_type
+		dataType: string
+		lineageTag: 661dfb3e-bc54-4243-8b70-a9ff7017202d
+		sourceColumn: casualty_type
+
+	column age_band_casualty
+		dataType: string
+		lineageTag: 4645a1ec-76c6-4323-860a-688ae99796f7
+		sourceColumn: age_band_casualty
+
+	column sex_of_casualty
+		dataType: string
+		lineageTag: e0f80701-fe9f-4578-b694-270703cd6c4b
+		sourceColumn: sex_of_casualty
+
+	column usager_vulnerable
+		dataType: boolean
+		lineageTag: 2e0794e3-4f31-4114-9bd7-04c3d6bf56c4
+		sourceColumn: usager_vulnerable
+
+	partition DIM_VICTIME-Partition = m
+		source =
+				let
+				    Source = Sql.Database("localhost", "DW_RoadSafety", [Query="SELECT casualty_key, casualty_class, casualty_type, age_band_casualty, sex_of_casualty, usager_vulnerable FROM dbo.DIM_VICTIME"])
+				in
+				    Source
+

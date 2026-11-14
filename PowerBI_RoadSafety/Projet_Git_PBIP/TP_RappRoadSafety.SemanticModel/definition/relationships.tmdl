@@ -1,0 +1,24 @@
+relationship Relationship
+	fromColumn: FACT_COLLISION.temps_key
+	toColumn: DIM_TEMPS.temps_key
+
+relationship 'Relationship 1'
+	fromColumn: FACT_COLLISION.location_key
+	toColumn: DIM_LIEU.location_key
+
+relationship 'Relationship 2'
+	fromColumn: FACT_COLLISION.condition_key
+	toColumn: DIM_CONDITIONS.condition_key
+
+relationship 'Relationship 3'
+	fromColumn: FACT_COLLISION.vehicle_type_key
+	toColumn: DIM_VEHICULE.vehicle_type_key
+
+relationship 'Relationship 4'
+	fromColumn: FACT_COLLISION.casualty_key
+	toColumn: DIM_VICTIME.casualty_key
+
+relationship 'Relationship 5'
+	fromColumn: FACT_COLLISION.road_key
+	toColumn: DIM_ROAD.road_key
+
